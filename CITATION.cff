@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+title: DTP Boost
+version: '2.0'
+date-released: '2025-08-14'
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Rachel
+    family-names: Hounsell
+    email: rachel.hounsell@uct.ac.za
+    orcid: 'https://orcid.org/0000-0003-1393-4294'
+    affiliation: 'Modelling and Simulation Hub, Africa (MASHA), University of Cape Town, South Africa; Nuffield Department of Medicine, University of Oxford, UK'
+    name-suffix: Ms
+  - given-names: Jared
+    family-names: Norman
+    name-suffix: Mr
+    email: jared.norman@uct.ac.za
+    affiliation: 'Modelling and Simulation Hub, Africa (MASHA), University of Cape Town, South Africa'
+    orcid: 'https://orcid.org/0000-0002-5692-999X'
+  - given-names: Retselisitsoe
+    family-names: Monyake
+    name-suffix: Mr
+    email: retselisitsoe.monyake@uct.ac.za
+    affiliation: 'Modelling and Simulation Hub, Africa (MASHA), University of Cape Town, South Africa'
+    orcid: 'https://orcid.org/0009-0009-5024-0575'
+  - given-names: Sheetal
+    family-names: Silal
+    name-suffix: Prof
+    email: sheetal.silal@uct.ac.za
+    affiliation: 'Modelling and Simulation Hub, Africa (MASHA), University of Cape Town, South Africa; Nuffield Department of Medicine, University of Oxford, UK'
+    orcid: 'https://orcid.org/0000-0002-3007-5383'
+repository-code: 'https://github.com/uct-masha/DTPBoost'
+url: 'https://masha-app.shinyapps.io/DTPBoost/'
+abstract: >-
+  DTP Boost is an interactive web-based decision-support tool to explore
+  the health and economic impact of the introduction of diphtheria-tetanus-pertussis-containing 
+  vaccine (DTPCV) booster doses. The tool is powered by an integrated, multi-disease epidemiological-economics
+  model, able to be tailored to a specific country.
+keywords:
+  - infectious disease model
+  - diphtheria
+  - tetanus
+  - pertussis
+  - vaccination
+  - DTPCV booster doses
+license: CC-BY-NC-SA-4.0

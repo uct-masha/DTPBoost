@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+rsconnect/
+models/inputs/contacts/*.rds
+cachedAppObjects/*.rds
+cali_cache/
+cali_cache_raw/
+calibrationResults/
+getShinyInputsObjects_*

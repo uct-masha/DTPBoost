@@ -1,0 +1,1 @@
+ <i class="fa fa-info-circle" role="presentation" aria-label="info-circle icon", style="float: right"></i>

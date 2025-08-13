@@ -1,0 +1,570 @@
+/* change app font */
+body, h1, h2, h3, h4, h5, h6 {
+  /*font-family: ReithSans,Helmet,Freesans,Helvetica,Arial,sans-serif !important;*/
+  color: #4f4f4f !important;
+}
+
+/* change body font */
+body, label {
+  font-size: 15px !important;
+}
+
+/* change box title font */
+.box .box-header .box-title {
+    font-size: 20px;
+}
+
+/* remove space below select input */
+.selectize-control.multi, .selectize-control.single {
+    padding: 0;
+}
+
+.selectize-control {
+    margin-bottom: 0px;
+}
+
+/* Override background logo at top left */
+span.logo {
+  /*background-image: url(bg.jfif);  Saved in www/ directory */
+  background-color: #237D80 !important;
+  background-size: 300px;
+  /*background-blend-mode: color-burn;  Apply a layer filter */
+}
+
+/* These override the font colour of the main space navigation tabs */
+
+.nav-tabs-custom>.nav-tabs>li>a {
+  color: #EEE !important;
+}
+.nav-tabs-custom>.nav-tabs>li.active>a {
+    color: #FFF !important;
+}
+
+.nav-tabs-custom>.nav-tabs>li.active {
+    border-color: #FFF !important;
+    border: solid;
+    border-radius: 1px !important;
+}
+
+.selectize-control.multi .selectize-dropdown .selected.active, .selectize-control.single .selectize-dropdown .selected.active {
+    background-color: #EEE !important;
+}
+
+.selectize-control.multi .selectize-dropdown .selected, .selectize-control.single .selectize-dropdown .selected {
+    background-color: inherit !important;
+}
+
+.selectize-control.multi .selectize-input > div.active {
+  color: #333;
+}
+
+
+/* Epidemiological Output tabset */
+
+#results_output, #eo_results_output, #eo2_results_output  {
+  background-color: #FFF !important;
+}
+
+#results_output > li > a, #eo_results_output > li > a, #eo2_results_output > li > a {
+  color: #333 !important;
+}
+
+#results_output > li.active, #eo_results_output > li.active, #eo2_results_output > li.active {
+  border-bottom: 4px solid #1ab394;
+}
+
+/*
+.skin-blue-light .nav-tabs {
+    background: #e4fcff;
+}
+/**/
+
+/*
+Interventions
+*/
+
+.interventions {
+  border: 1px dashed gray;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/*"Settings" button text on click*/
+.btn-primary.active.focus,
+.btn-primary.active:focus,
+.btn-primary.active:hover,
+.btn-primary:active.focus,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.open>.dropdown-toggle.btn-primary.focus,
+.open>.dropdown-toggle.btn-primary:focus,
+.open>.dropdown-toggle.btn-primary:hover {
+    color: #111;
+}
+
+/* Settings text was being applied after dropping down which was hidden against the dark background */
+/* Acheived this by adding div.dropdown:not(div.open) before the match */
+div.dropdown:not(div.open) .btn:not(.btn-raised).btn-primary, .input-group-btn .btn:not(.btn-raised).btn-primary {
+    color: #237D80;
+}
+/* Then target the dropped down colours after using the dropdown menu */
+.btn:not(.btn-raised).btn-primary, .input-group-btn .btn:not(.btn-raised).btn-primary {
+    color: #EEE;
+}
+
+.selectize-control.multi .selectize-input.input-active>.item, .selectize-control.multi .selectize-input.input-active>div, .selectize-control.multi .selectize-input>.item, .selectize-control.multi .selectize-input>div, .selectize-control.single .selectize-input.input-active>.item, .selectize-control.single .selectize-input.input-active>div, .selectize-control.single .selectize-input>.item, .selectize-control.single .selectize-input>div {
+    background: #FFF;
+}
+
+.selectize-control.multi .selectize-input.input-active>.item, .selectize-control.multi .selectize-input.input-active>div, .selectize-control.multi .selectize-input>.item, .selectize-control.multi .selectize-input>div, .selectize-control.single .selectize-input.input-active>.item, .selectize-control.single .selectize-input.input-active>div, .selectize-control.single .selectize-input>.item, .selectize-control.single .selectize-input>div {
+    display: inline-block;
+    margin: 0 8px 3px 0;
+    padding: 1px 5px 1px 5px;
+    background-color: white;
+}
+
+
+.reg {
+  margin-top: 16px;
+  text-align: left;
+  font-size: 15px;
+  line-height: 1.42857143;
+  color: #282828;
+  font-weight: 400;
+}
+
+
+/* Vaccine multi-selection region */
+/*
+div.form-group div.selectize-control {
+  background-color: #E5EEF0;
+}
+*/
+
+
+
+
+/*FLOAT*/
+
+.float-go-interv {
+  bottom: calc(2%);;
+  right: calc(2%);;
+  max-width: 500px;
+  z-index: 2;
+  position: fixed;
+}
+.panel.panel-success>.panel-heading {
+    background-color: #1AB394;
+}
+
+#go_interventions {
+  margin-right: 35px;
+}
+
+
+/* Radio Buttons */
+div.radio > label > span:nth-child(4) {
+    left: 2em;
+    width: 40em;
+}
+
+
+/*DT on Step1 Country Profile Demog*/
+.dataTables_scrollBody {
+  overflow-x: scroll !important;
+  height: auto !important;
+}
+
+
+
+
+
+
+ul.dropdown-menu div.shiny-input-checkboxgroup {
+    margin: 0px;
+}
+
+ul.dropdown-menu div.shiny-input-container {
+    margin: 0;
+}
+
+
+/* Partner logos
+.brands {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1rem;
+}
+
+*/
+
+.col-sm-4 img {
+  width: 100%;
+  height: 100%;
+}
+
+/* info buttons */
+
+.btn-info {
+    padding: 0px;
+    color: #237D80 !important;
+}
+
+/* fix the select input options */
+.selectize-control.multi .selectize-input.input-active:after, .selectize-control.multi .selectize-input:after, .selectize-control.single .selectize-input.input-active:after, .selectize-control.single .selectize-input:after {
+    content: " " !important;
+}
+
+.form-group {
+
+    margin: 0 0 0 0 !important;
+}
+
+/* increase font size on input labels */
+.form-group label.control-label {
+    font-size: 14px;
+}
+
+/* remove the dropdown arrow in the replace button */
+.caret {
+    display: none;
+}
+
+/* change padding for box header to match the body*/
+.box .box-header {
+    padding: 10px;
+}
+
+/* style the verify data buttons */
+.verify {
+    color: #ffffff !important;
+    background: #336ea2;
+    border-color: #336ea2;
+    border-width: 1px;
+    border-style: solid;
+    transition: box-shadow .3s linear,background-color .3s linear,border-color .3s linear;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.verify:hover {
+    color: #336ea2 !important;
+    background-color: #ffffff !important;
+    border-color: #336ea2 !important;
+}
+
+/* dropdown button */
+.dropdown-toggle {
+    color: #237D80 !important;
+    border-color: #237D80;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
+}
+
+.dropdown-toggle::after {
+    color: #237D80 !important;
+    border-color: #237D80;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
+}
+
+.dropdown-toggle:hover {
+    color: #EEEEEE !important;
+    background-color: #336ea2 !important;
+}
+
+.dropdown-toggle:focus {
+    color: #EEEEEE !important;
+    background-color: #237D80 !important;
+}
+
+.btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary {
+    color: #EEEEEE !important;
+    background-color: #237D80 !important;
+}
+
+/* shinyhelper icon button */
+.fa-question-circle:before {
+  color: #237D80 !important;
+}
+
+/* disabled buttons */
+.btn.disabled, .btn[disabled] {
+    color: #606060 !important;
+    background-color: #0000000D !important;
+    border-color: #0000000D !important;
+}
+
+/* as table and as plot buttons */
+#asPlt {
+    color: #ffffff;
+    background-color: #1ab394;
+}
+
+#asPlt:hover {
+    color: #1ab394;
+    background-color:#A4E9CA;
+}
+
+#asPlt:active {
+    color: #1ab394 !important;
+    background-color:#A4E9CA !important;
+}
+
+#asTbl {
+    color: #1ab394;
+    border-color: #1ab394;
+    border-width: 1px;
+    border-style: solid;
+    margin-left: 8px;
+    margin-right: 15px;
+}
+
+#asTbl:hover {
+    background-color:#DAF6E9;
+}
+
+/* style button after it is clicked */
+
+.btn:not(.btn-raised):not(.btn-link):focus, .btn:not(.btn-raised):not(.btn-link):hover, .input-group-btn .btn:not(.btn-raised):not(.btn-link):focus, .input-group-btn .btn:not(.btn-raised):not(.btn-link):hover {
+    background-color: #237D80 !important;
+}
+
+#saveProfile {
+    color: #ffffff;
+    background-color: #1ab394;
+}
+
+#saveProfile:hover {
+    color: #1ab394;
+    background-color:#A4E9CA;
+}
+
+/* align heading with the input widgets */
+#primCov {
+    color: #BDBDBD;
+    margin-top: 16px !important;
+    font-weight: 400;
+}
+
+#parameter_upload, #save_session {
+    margin-right: 15px;
+    color: hsl(210deg 8% 25%);
+    background-color: hsl(0deg 0% 100%);
+    border-color: hsl(210deg 8% 85%);
+    position: relative;
+    display: inline-block;
+    padding: 0.8em;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    outline: none;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1.15384615;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+}
+
+#parameter_upload:hover, #save_session:hover {
+    color: #ffffff;
+}
+
+.btn:not(.btn-raised):not(.btn-link):focus,
+.btn:not(.btn-raised):not(.btn-link):hover {
+  color: #ffffff !important;
+}
+
+.form-group.checkbox label, .form-group .radio label, .form-group label {
+    padding: 0 !important;
+    padding-right: 10px !important;
+}
+
+/* interventions dropdwons*/
+.selectize-dropdown.single.form-control.shinyjs-resettable.plugin-selectize-plugin-a11y {
+  position: static !important;
+  z-index: 1000 !important;
+}
+
+.selectize-dropdown.single.form-control.plugin-selectize-plugin-a11y {
+  position: static !important;
+  z-index: 1000 !important;
+}
+
+/* Radio toggle */
+.alert-info, .bg-aqua, .callout.callout-info, .label-info, .modal-info .modal-body {
+    background-color: #824A76!important;
+}
+
+/* model running notification */
+.shiny-notification-message {
+  background-color: #6a6a6a !important;
+}
+
+/* sortable drag items */
+.default-sortable .rank-list-item:hover:not(.disabled) {
+    background-color: #B7B7B9 !important;
+    cursor: grab;
+}
+
+.dropdown-menu-cov_temp {
+  background-color: #B7B7B9 !important;
+}
+
+/* radio buttons */
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
+    color: #ffffff !important;
+    background-color: #008080;
+    background-image: none;
+    border-color: #adadad;
+}
+
+/* vaccine coverage download button, clinical burden download and all fileinput buttons */
+#templatevaxcov, #template_burden, .btn.btn-file {
+    color: #ffffff !important;
+    background-color: #008080!important;
+}
+
+/* costs info button */
+#costs_info {
+  margin: 0px !important;
+}
+
+/* selectize inputs have text by default but we'd prefer a hand */
+.selectize-input {
+    cursor: pointer;
+}
+
+#go_to_calibration, #calibrate_manual, #calibrate_automatic, 
+#accept_manual_calibration, #go_to_advanced,
+#accept_auto_calibration, #downloadoutput, 
+ #report {  color: #ffffff;
+  background-color:#237D80;
+}
+
+
+button.btn.radiobtn.btn-default.active.disabled {  
+  color: #606060!important;
+}
+
+button.btn.radiobtn.btn-default.disabled {  
+  color: #ffffff!important;
+}
+
+label#burden_source-label.control-label,
+label#accept_auto_calibration-label.control-label {
+  margin-top: 0px !important;
+}
+
+button.btn.radiobtn.btn-calibration_btns.active {
+  color: #ffffff !important;
+  background-color:#824A76 !important;
+}
+
+button.btn.radiobtn.btn-calibration_btns:hover {
+  color: #ffffff !important;
+  background-color:#824A76 !important;
+}
+
+/* eg, hide the ptrans_D parameter */
+span.hideThis {
+  display: none;
+}
+
+
+#myProgress {
+  width: 100%;
+  background-color: grey;
+}
+
+#myBar {
+  width: 100%;
+  height: 30px;
+    background-color: #237d80;
+    color: white;
+    text-align: right;
+    padding: 4px 0px 4px 0px;
+}
+
+/* hide the header space for the intro cost */
+#intro_cost_box .box-header {
+  display: none
+}
+
+/*
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  margin-bottom: 10px;   Vertical Space 
+}
+*/
+
+/*  Style input labels */
+.form-group label {
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: #282828;
+    font-weight: 300;
+    margin: 16px 0px 0px; /* Align the sliderinputs with the automuericinputs */ 
+}
+
+
+/* style delivery text outputs */
+#del_o_ps, #del_o_b, #del_o_cb, #del_o_ab, #del_o_m {
+  margin-top: 16px !important;
+  color: #211e1e;
+  background-color: #f7f7f9;
+  border: 1px solid #237d80;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-weight: 300;
+}
+
+/*  This is too specific but I don't think that is an issue since we only have it one
+    place.
+*/
+.sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu>li:hover>.treeview-menu, .sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu>li:hover>a>span:not(.pull-right) {
+    display: block!important;
+    position: absolute;
+    width: 240px;
+    left: 50px;
+}
+
+/* style start button */
+#verify_setup, #start, #restoreSpecialSession {
+  color: #ffffff!important;
+  background-color:  #F5793A !important;
+}
+
+#start:hover, #restoreSpecialSession:hover {
+  color: #ffffff!important;
+  background-color: #237D80!important;
+}
+
+/* style text below the verify settings button */
+#verify_text, #model_horizon_text {
+  color: #4f4f4f;
+  padding: 10px;
+  position: relative;
+  border-style: dashed;
+}
+
+/* style text below the model horizon selection */
+#model_horizon_text {
+  color: #4f4f4f;
+  padding: 10px;
+  position: relative;
+  border-style: dotted;
+}
+
+/* style the next colours */
+#next_cvs, #next_hs, #next_costs, #next_dbs, #next_uncertainty {
+  color: #ffffff;
+  background-color: #237D80;
+}
