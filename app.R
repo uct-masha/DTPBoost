@@ -4032,8 +4032,8 @@ server <- function(input, output, session) {
   # Run model
   observeEvent(input$go_interventions, {
     
-    # Check the user has completed calibration")
-    if (simul_packages$nb <= 0) {
+    # Check the user has completed calibration
+    if (is.null(simul_baseline())) {
       showModal(modalDialog(
         title = "No Baseline",
         "Please run the calibration step first to create a baseline model.",
