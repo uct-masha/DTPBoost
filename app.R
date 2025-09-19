@@ -307,6 +307,13 @@ body <- dashboardBody(
                   style = "text-align: justify;list-style-type: disc", "Dr Rania Tohme, Hepatitis B and Tetanus Team in the Global Immunization Division at the U.S. Centers for Disease Control and Prevention (CDC)")
               )
             ),
+            ### Resources ----
+            tabPanel(
+              "Resources",
+              h4("Resources"),
+              br(),
+              p("Placeholder for resources (e.g. user manual, model documentation, publications etc.)")
+            ),
             ### Contact ----
             tabPanel(
               "Contact",
