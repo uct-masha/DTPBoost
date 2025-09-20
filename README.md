@@ -269,18 +269,41 @@ DTPShiny/
 
 ## Contributing
 
-We welcome contributions to improve DTP Boost! Here's how you can help:
+We welcome contributions to improve DTP Boost! This project uses a Git Flow branching strategy for organized development.
 
--   **Report Issues**: Use the GitHub issue tracker to report bugs or
-    suggest enhancements
--   **Code Contributions**: Fork the repository, make your changes, and
-    submit a pull request
--   **Documentation**: Help improve our documentation
--   **Testing**: Test the application with different country profiles,
-    parameters and datasets and report any issues
+### Quick Start for Contributors
 
-Please ensure all contributions follow R coding best practices and
-include appropriate documentation.
+1. **Read the [Contributing Guidelines](CONTRIBUTING.md)** - Essential reading for all contributors
+2. **Use the `dev` branch** - All development happens on the `dev` branch, not `main`
+3. **Create feature branches** - Branch from `dev` for your changes: `git checkout -b feature/your-feature-name`
+4. **Submit Pull Requests** - Create PRs from your feature branch to `dev`
+
+### How You Can Help
+
+-   **Report Issues**: Use our [issue templates](.github/ISSUE_TEMPLATE/) to report bugs or suggest enhancements
+-   **Code Contributions**: Follow our Git Flow process outlined in [CONTRIBUTING.md](CONTRIBUTING.md)
+-   **Documentation**: Help improve our documentation and user guides
+-   **Testing**: Test the application with different country profiles, parameters and datasets
+
+### Development Workflow
+
+```bash
+# Start with the dev branch
+git checkout dev
+git pull origin dev
+
+# Create your feature branch
+git checkout -b feature/your-feature-name
+
+# Make changes, commit, and push
+git push origin feature/your-feature-name
+
+# Create PR from feature branch to dev
+```
+
+**Important**: The `main` branch is protected and contains only production-ready code. All development work should target the `dev` branch.
+
+Please ensure all contributions follow R coding best practices and include appropriate documentation. See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## Cite
 
