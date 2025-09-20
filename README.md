@@ -305,6 +305,8 @@ git push origin feature/your-feature-name
 
 Please ensure all contributions follow R coding best practices and include appropriate documentation. See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
+> **Note for Repository Administrators**: To complete the Git Flow setup, please see [`.github/BRANCH_PROTECTION_SETUP.md`](.github/BRANCH_PROTECTION_SETUP.md) for instructions on creating the `dev` branch and configuring branch protection rules.
+
 ## Cite
 
 The `CITATION.cff` file is included in this repository to provide
