@@ -308,12 +308,13 @@ body <- dashboardBody(
               )
             ),
             ### Resources ----
-            tabPanel(
-              "Resources",
-              h4("Resources"),
-              br(),
-              p("Placeholder for resources (e.g. user manual, model documentation, publications etc.)")
-            ),
+            # Commented out on main for now as no resources to link to yet
+            # tabPanel(
+            #   "Resources",
+            #   h4("Resources"),
+            #   br(),
+            #   p("Placeholder for resources (e.g. user manual, model documentation, publications etc.)")
+            # ),
             ### Contact ----
             tabPanel(
               "Contact",
