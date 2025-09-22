@@ -241,6 +241,49 @@ options(shiny.autoreload = TRUE)
 options(shiny.trace = TRUE)
 ```
 
+### Deployment Notes
+
+The application can be deployed to shinyapps.io or other hosting
+services. One can use the `deployApp.R` script to facilitate deployment,
+though it will require a paid account as the default free tier does not
+support the required resources. In particular the memory consumption
+required to run the three models in parallel needs 8Gb.
+
+#### Configuration Flags
+
+Several flags at the top of `app.R` can/should be adjusted for
+deployment:
+
+-   `DEBUG` - Controls debug mode (default: `FALSE`). When `TRUE`,
+    enables additional logging and debugging features
+-   `shouldCacheCalibrationTibble` - Controls whether calibration
+    results are cached to Google Sheets (default: `!DEBUG && FALSE`)
+-   `shouldSaveAppObjects` - Whether to save debugging artifacts as RDS
+    files in `cachedAppObjects/` directory (default: `DEBUG`)
+-   `shouldPredictPtrans` - Whether transmission parameters are
+    calculated from the model (default: `TRUE`)
+-   `shouldZipFiles` - Controls download format - when `FALSE`,
+    downloads Excel files directly; when `TRUE`, creates zip archives
+    (default: `FALSE` due to shinyapps.io compatibility issues)
+-   `shouldIncludeDebugWidgets` - Whether to include debugging widgets
+    in the UI (default: `FALSE`)
+
+#### Additional deployment considerations
+
+-   **Memory Requirements**: Ensure hosting environment has at least 8GB
+    RAM for parallel model execution
+
+-   **Google Services**: If using calibration caching, ensure Google
+    Drive/Sheets authentication is properly configured - this is kept
+    for future internal development so we don't go into detail here
+
+-   **File Downloads**: The `shouldZipFiles` flag is set to `FALSE` by
+    default due to zip download issues on shinyapps.io but your mileage
+    may vary
+
+-   **Performance**: Debug mode should be disabled (`DEBUG=FALSE`) in
+    production for optimal performance
+
 ## Project Structure
 
 ```         
