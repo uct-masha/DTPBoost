@@ -256,6 +256,10 @@ deployment:
 
 -   `DEBUG` - Controls debug mode (default: `FALSE`). When `TRUE`,
     enables additional logging and debugging features
+-   `HIDE_DIPH_EPI` - Whether to hide the epidemiological outputs for
+    diphtheria. This is useful if diphtheria is not endemic in the
+    country of interest. In such an outbreak setting it would be
+    misleading to show the time averaged outputs
 -   `shouldCacheCalibrationTibble` - Controls whether calibration
     results are cached to Google Sheets (default: `!DEBUG && FALSE`)
 -   `shouldSaveAppObjects` - Whether to save debugging artifacts as RDS

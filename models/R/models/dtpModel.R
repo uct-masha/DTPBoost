@@ -297,6 +297,7 @@ pltModelOutput <- function(model_outputs,  # model_outputs() in shiny rbinds the
   diseases <- c("Diphtheria","Tetanus","Pertussis")
   
   if (disease!="All") diseases = disease
+  if (disease=="AllButDiphtheria") diseases = c("Tetanus","Pertussis")
   LOG('scenario = {scenarios}')
   if(output_variable=="Population protected") {
     count_type = "Total"

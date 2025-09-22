@@ -1,4 +1,5 @@
 DEBUG=F
+HIDE_DIPH_EPI = F # Hide diphtheria epidemiology outputs like cases, deaths etc but not Population protected
 shouldCacheCalibrationTibble = !DEBUG && F
 shouldSaveAppObjects = DEBUG  # Change to TRUE to always save objects
 shouldPredictPtrans = T  # ptrans calculated from model
@@ -4274,14 +4275,14 @@ server <- function(input, output, session) {
     }
     
     
-    
+    is_epi_outputs <- output_variable != "Population protected"
     pltModelOutput(
       model_outputs = isolate(model_outputs()),
       age_group = input$epi_output_age_group,
       scenarios = input$rank_list_show,
       #sim_window = input$epi_output_sim_window,
       sim_window = econAnalysisRange(),
-      disease = "All",
+      disease = if(HIDE_DIPH_EPI&is_epi_outputs){"AllButDiphtheria"}else{"All"},
       count_type = count_type,
       output_variable = output_variable,
       scale_option = scale_option
@@ -4306,16 +4307,30 @@ server <- function(input, output, session) {
       showNotification("Population protected not available for PER 100,000. Plotting the COUNT value.", duration = 5)
       count_type = "Total"
     }
-    pltModelOutput(
-      model_outputs = isolate(model_outputs()),
-      age_group = input$epi_output_age_group,
-      scenarios = input$rank_list_show,
-      #sim_window = input$epi_output_sim_window,
-      sim_window = econAnalysisRange(),
-      disease = "Diphtheria",
-      count_type = count_type,
-      output_variable = output_variable
-    )
+    is_epi_outputs <- output_variable != "Population protected"
+    if (HIDE_DIPH_EPI&is_epi_outputs) {
+      result <- plotly_empty(type = "scatter", mode = "markers") |>
+        layout(
+          title = list(text = "Diphtheria outputs are only available for\nPopulation protected as averaged case data\nis not meaningful in an outbreak context.",
+                       x = 0.5,
+                       y = 0.5,
+                       font = list(size = 20)),
+          xaxis = list(visible = FALSE),
+          yaxis = list(visible = FALSE)
+        )
+    } else {
+      result <- pltModelOutput(
+        model_outputs = isolate(model_outputs()),
+        age_group = input$epi_output_age_group,
+        scenarios = input$rank_list_show,
+        #sim_window = input$epi_output_sim_window,
+        sim_window = econAnalysisRange(),
+        disease = "Diphtheria",
+        count_type = count_type,
+        output_variable = output_variable
+      )
+    }
+    result
   })
   
   output$dip_model_tbl <- renderReactable({
