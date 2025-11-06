@@ -105,9 +105,11 @@ choices_vv_m = c("None", "Td", "TdaP", "TT")
 
 boosters <- str_split("Primary Series,Infant Booster,Child Booster,Adolescent Booster",',') %>% first
 
+sidebar_width <- 275
+
 # dashboard header ----
 header <- dashboardHeader(
-  title = "DTP Boost", titleWidth = 265,
+  title = "DTP Boost", titleWidth = sidebar_width,
   # https://stackoverflow.com/questions/47569992/home-button-in-header-in-r-shiny-dashboard
   # tags$li(class = "dropdown", 
   #         style = "padding: 20px 10px 0px 0px;",
@@ -119,12 +121,12 @@ header <- dashboardHeader(
 # dashboard sidebar ----
 sidebar <- dashboardSidebar(
   #id = "sidebar",
-  width = 265,
+  width = sidebar_width,
   sidebarMenu(
     id = "menu",
     menuItem("Welcome", tabName = 'welcome', icon = icon("fas fa-home")),
     menuItem("Step 1. Set-up Country Profile", tabName = 'model1', icon = icon("1")),
-    menuItem("Step 2. Calibrate Model", tabName = 'model2', icon = icon("2")),
+    menuItem("Step 2. Explore data and uncertainty", tabName = 'model2', icon = icon("2")),
     menuItem("Step 3. Design Booster Strategy", tabName = 'model3', icon = icon("3")),
     menuItem("Step 4. Explore Results", tabName = 'model4', icon = icon("4"))
   )
@@ -888,7 +890,7 @@ body <- dashboardBody(
           width = 12, title = NULL,
           ### Model Calibration ----
           tabPanel(
-            title = "2.1 Select data",
+            title = "2.1 Explore data",
             value = 1,
             fluidRow(
               column(
@@ -960,6 +962,7 @@ body <- dashboardBody(
                   )
                 )
               ),
+              uiOutput("custom_data_upload"),
               column(
                 width = 12,
                 fluidRow(
@@ -1006,126 +1009,129 @@ body <- dashboardBody(
               )
             )
           ),
-          tabPanel(
-            title = "2.2 Calibration",
-            value = 2,
-            fluidRow(
-              column(
-                12,
-                h3("Instructions"),
-                p("The aim of the manual calibration is to adjust the slider values for both pertussis and tetanus until the model output resembles the data. You will need to press the", tags$strong("RUN THE MODEL"), "button after each adjustment of the sliders."),
-                p("This manual calibration is a simple form of face validation, which qualitatively assesses if the model is an adequate representation of the data. "),
-                p("If you are happy with your calibration, press the",tags$strong("ACCEPT THIS CALIBRATION AND MOVE ON"), "button to move to Step 3: Booster Strategy Design."),
-                br()
-              )
-            ),
-            fluidRow(
-              column(
-                width = 3,
-                tags$span(class="hideThis",
-                          sliderInput(
-                            inputId = "ptrans_D",  # This should be hidden (in www/style.css) since we don't view diphtheria in calibration currently
-                            label = "Diphtheria transmission tuning parameter",
-                            min = 1,
-                            max = 1000,
-                            value = 275
-                          )
-                ),
-                sliderInput(
-                  inputId = "ptrans_T",
-                  label = "Tetanus transmission tuning parameter",
-                  min = 1,
-                  max = 50,
-                  value = 12, 
-                  step = 0.1
-                ),
-                sliderInput(
-                  inputId = "ptrans_P",
-                  label = "Pertussis transmission tuning parameter",
-                  min = 1,
-                  max = 100,
-                  value = 25, 
-                  step = 0.1
-                ),
-                br(),
-                actionButton(
-                  inputId = "calibrate_manual",
-                  label = "Run the model",
-                  width = "100%"
-                )
-              ),
-              column(
-                width = 9,
-                uiOutput("manual_calibration")
-              )
-            ),
-            br(),
-            fluidRow(
-              column(
-                offset = 8,
-                width = 4,
-                actionButton(
-                  inputId = "accept_manual_calibration",
-                  label = "ACCEPT THIS CALIBRATION AND MOVE ON"
-                )
-              )
-            )
-          ),
-          tabPanel(
-            title = "2.3  Assessing uncertainty",
-            value = 3,
-            fluidRow(
-              column(
-                width = 2,
-                offset = 10,
-                actionButton("next_uncertainty", "Next", class = "btn-block")
-              ),
-              column(
-                12,
-                h3("Instructions"),
-                p("As models are simplifications of the real world, it is important to assess the variability of the model predictions in relation to the decision you wish to inform from model evidence. Guidance has been provided below on how to use the DTP Boost tool to test the robustness of model predictions."),
-                br(),
-                h4("Many sources of uncertainty"),
-                p("Uncertainty exists in many forms in modelling including:"),
-                tags$ul(
-                  tags$li("Uncertainty in the model inputs such as the those entered into the sliders and information boxes."),
-                  tags$li("Uncertainty in the case incidence data that is used to tune the model in the calibration process to create the baseline scenario."),
-                  tags$li("Uncertainty in the reduction of effectiveness of the vaccine booster strategies due to operational implementation."),
-                  tags$li("Uncertainty in the estimates of cost and cost effectiveness of the vaccine booster strategies.")
-                ),
-                br(),
-                h4("Using the DTP Boost tool"),
-                p("Consider the example of using the DTP Boost tool to determine if the country should introduce a new adolescent booster dose."),
-                p("The baseline scenario is important to establish correctly as it sets the foundation against which new strategies are explored and measured."),
-                br(),
-                p("To develop a robust baseline scenario:"),
-                tags$ul(
-                  tags$li("Vary the input values such as annual vaccine coverage and health system characteristics to see how the baseline changes."),
-                  tags$li("Place emphasis on varying those input values you are most uncertain about. See how the baseline changes for a range of plausible values.")
-                ),
-                br(),
-                p("The value of the calibration is to position the baseline scenario in line with observed/estimated cases. It is important to choose the dataset for calibration carefully as this dataset should best describe the incidence in the population for both pertussis and tetanus."),
-                tags$ul(
-                  tags$li("Where data does not exist, provide insight by uploading plausible expert-informed pseudo-data using the 'Upload your data' feature. Try to capture different trends and patterns in incidence."),
-                  tags$li("Fit the model to multiple datasets to define several baselines. You can use the 'Save your session' feature at the top right of the page to save your different baseline scenarios. You can then upload each session separately and test out the intended adolescent booster strategy.")
-                ),
-                br(),
-                p("To develop a robust booster scenario:"),
-                tags$ul(
-                  tags$li("Because there can be a decrease in vaccine impact due to operational challenges during implementation, you should test the booster scenario for a range of coverage values."),
-                  tags$li("Consider different target age groups if the intended age group may be difficult to reach or characterise."),
-                  tags$li("As potential implementation and vaccine costs are not always known in advance, run the scenario several times varying the input cost values. Note the impact that changing input costs has on the total cost and cost effectiveness.")
-                ),
-                br(),
-                p("In this manner, assessing the uncertainty will allow you to:"),
-                tags$ul(
-                  tags$li("Gain insight into which health system and cost inputs are most important to estimate correctly. "),
-                  tags$li("Understand what sources of uncertainty have a large impact on the decision to introduce the new adolescent booster dose. ")
-                ),
-                br()
-              )
-            )
-          )
+          tabPanel("2.2 Explore uncertainty"),
+          tabPanel("2.3 Approach to calibration"),
+          tabPanel("2.4 Visualise calibration results")
+          # tabPanel(
+          #   title = "2.2 Calibration",
+          #   value = 2,
+          #   fluidRow(
+          #     column(
+          #       12,
+          #       h3("Instructions"),
+          #       p("The aim of the manual calibration is to adjust the slider values for both pertussis and tetanus until the model output resembles the data. You will need to press the", tags$strong("RUN THE MODEL"), "button after each adjustment of the sliders."),
+          #       p("This manual calibration is a simple form of face validation, which qualitatively assesses if the model is an adequate representation of the data. "),
+          #       p("If you are happy with your calibration, press the",tags$strong("ACCEPT THIS CALIBRATION AND MOVE ON"), "button to move to Step 3: Booster Strategy Design."),
+          #       br()
+          #     )
+          #   ),
+          #   fluidRow(
+          #     column(
+          #       width = 3,
+          #       tags$span(class="hideThis",
+          #                 sliderInput(
+          #                   inputId = "ptrans_D",  # This should be hidden (in www/style.css) since we don't view diphtheria in calibration currently
+          #                   label = "Diphtheria transmission tuning parameter",
+          #                   min = 1,
+          #                   max = 1000,
+          #                   value = 275
+          #                 )
+          #       ),
+          #       sliderInput(
+          #         inputId = "ptrans_T",
+          #         label = "Tetanus transmission tuning parameter",
+          #         min = 1,
+          #         max = 50,
+          #         value = 12, 
+          #         step = 0.1
+          #       ),
+          #       sliderInput(
+          #         inputId = "ptrans_P",
+          #         label = "Pertussis transmission tuning parameter",
+          #         min = 1,
+          #         max = 100,
+          #         value = 25, 
+          #         step = 0.1
+          #       ),
+          #       br(),
+          #       actionButton(
+          #         inputId = "calibrate_manual",
+          #         label = "Run the model",
+          #         width = "100%"
+          #       )
+          #     ),
+          #     column(
+          #       width = 9,
+          #       uiOutput("manual_calibration")
+          #     )
+          #   ),
+          #   br(),
+          #   fluidRow(
+          #     column(
+          #       offset = 8,
+          #       width = 4,
+          #       actionButton(
+          #         inputId = "accept_manual_calibration",
+          #         label = "ACCEPT THIS CALIBRATION AND MOVE ON"
+          #       )
+          #     )
+          #   )
+          # ),
+          # tabPanel(
+          #   title = "2.3  Assessing uncertainty",
+          #   value = 3,
+          #   fluidRow(
+          #     column(
+          #       width = 2,
+          #       offset = 10,
+          #       actionButton("next_uncertainty", "Next", class = "btn-block")
+          #     ),
+          #     column(
+          #       12,
+          #       h3("Instructions"),
+          #       p("As models are simplifications of the real world, it is important to assess the variability of the model predictions in relation to the decision you wish to inform from model evidence. Guidance has been provided below on how to use the DTP Boost tool to test the robustness of model predictions."),
+          #       br(),
+          #       h4("Many sources of uncertainty"),
+          #       p("Uncertainty exists in many forms in modelling including:"),
+          #       tags$ul(
+          #         tags$li("Uncertainty in the model inputs such as the those entered into the sliders and information boxes."),
+          #         tags$li("Uncertainty in the case incidence data that is used to tune the model in the calibration process to create the baseline scenario."),
+          #         tags$li("Uncertainty in the reduction of effectiveness of the vaccine booster strategies due to operational implementation."),
+          #         tags$li("Uncertainty in the estimates of cost and cost effectiveness of the vaccine booster strategies.")
+          #       ),
+          #       br(),
+          #       h4("Using the DTP Boost tool"),
+          #       p("Consider the example of using the DTP Boost tool to determine if the country should introduce a new adolescent booster dose."),
+          #       p("The baseline scenario is important to establish correctly as it sets the foundation against which new strategies are explored and measured."),
+          #       br(),
+          #       p("To develop a robust baseline scenario:"),
+          #       tags$ul(
+          #         tags$li("Vary the input values such as annual vaccine coverage and health system characteristics to see how the baseline changes."),
+          #         tags$li("Place emphasis on varying those input values you are most uncertain about. See how the baseline changes for a range of plausible values.")
+          #       ),
+          #       br(),
+          #       p("The value of the calibration is to position the baseline scenario in line with observed/estimated cases. It is important to choose the dataset for calibration carefully as this dataset should best describe the incidence in the population for both pertussis and tetanus."),
+          #       tags$ul(
+          #         tags$li("Where data does not exist, provide insight by uploading plausible expert-informed pseudo-data using the 'Upload your data' feature. Try to capture different trends and patterns in incidence."),
+          #         tags$li("Fit the model to multiple datasets to define several baselines. You can use the 'Save your session' feature at the top right of the page to save your different baseline scenarios. You can then upload each session separately and test out the intended adolescent booster strategy.")
+          #       ),
+          #       br(),
+          #       p("To develop a robust booster scenario:"),
+          #       tags$ul(
+          #         tags$li("Because there can be a decrease in vaccine impact due to operational challenges during implementation, you should test the booster scenario for a range of coverage values."),
+          #         tags$li("Consider different target age groups if the intended age group may be difficult to reach or characterise."),
+          #         tags$li("As potential implementation and vaccine costs are not always known in advance, run the scenario several times varying the input cost values. Note the impact that changing input costs has on the total cost and cost effectiveness.")
+          #       ),
+          #       br(),
+          #       p("In this manner, assessing the uncertainty will allow you to:"),
+          #       tags$ul(
+          #         tags$li("Gain insight into which health system and cost inputs are most important to estimate correctly. "),
+          #         tags$li("Understand what sources of uncertainty have a large impact on the decision to introduce the new adolescent booster dose. ")
+          #       ),
+          #       br()
+          #     )
+          #   )
+          # )
         )
       )
     ),
@@ -2411,6 +2417,60 @@ server <- function(input, output, session) {
       shinyjs::runjs("window.scrollTo(0, document.body.scrollHeight)") 
     }
   })
+
+  output$custom_data_upload <- renderUI({
+    if (!is.null(input$burden_input)) {
+      column(
+        width = 12,
+        fluidRow(
+          box(
+            title = "Uploaded data",
+            width = 12,
+            plotlyOutput("custom_data_plot")
+          )
+        )
+      )
+    }
+  })
+
+  output$custom_data_plot <- renderPlotly({
+    plot_data <- req(custom_burden_data()) %>% 
+      pivot_longer(!Year, names_to="Disease", values_to = "value") %>% 
+      select(Year, value, Disease) %>% 
+      filter(Year %between% caliTimeRange())
+    
+    p <- ggplot(
+      data = plot_data,
+      mapping = aes(
+        x = Year, y = value, colour = Disease, group = 1,
+        text = sprintf(
+          "Value: %s<br>Year: %s<br>", 
+          format(value, big.mark = ",", scientific = FALSE), 
+          Year
+        )
+      )
+    ) +
+      geom_point(size = 3, color='Black') +
+      expand_limits(y = 0) +
+      scale_y_continuous(labels = scales::comma) +
+      scale_color_hue(direction = 1) +
+      theme_minimal() +
+      labs(
+        shape=''
+      ) +
+      theme(axis.title.y = element_blank(),
+            axis.title.x = element_blank(),
+            legend.position="bottom") +
+      scale_x_continuous(breaks=scales::pretty_breaks())+
+      facet_wrap(vars(Disease), scales='free_y', nrow = 1)
+    
+    ggplotly(p, tooltip = c("text")) %>% 
+      layout(
+        legend = list(orientation = 'h'),
+        hovermode = 'x'
+      )
+  })
+
   
   observeEvent(input$calibrate_manual, {
     saveDebugRDS(reactiveValuesToList(input), 'manual_calibration_input.rds')
@@ -2677,6 +2737,8 @@ server <- function(input, output, session) {
         }
       })
     }
+    # scroll down to the uploaded dataset
+    shinyjs::runjs("window.scrollTo(0, document.body.scrollHeight)") 
   })
   
   # table to show custom burden data
