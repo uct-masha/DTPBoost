@@ -1159,32 +1159,33 @@ body <- dashboardBody(
               fluidRow(
                 box(
                   width = 12, title = "Designing a booster vaccination strategy",
-                  # h4("Designing a booster vaccination strategy"),
-                  # p("",tags$b("You may design, save and simulate as many strategies as you would like to compare and explore in the results section (Step 3).")," "),
                   br(),
                   p("You may design, save and simulate as many strategies as you would like to compare and explore in the results section (Step 4). "),
                   br(),
-                  p("",tags$b("Build package:")," To design a vaccination strategy, toggle on the options you would like to include. Once in the 'on' position, a settings button will become visible. This allows you to adjust the details of each option (see below). Defaults are provided but should be updated to reflect your selected strategy and context."),
+                  p(tags$b("Build package:"), " To design a vaccination strategy, toggle on the options you would like to include. Once in the 'on' position, a settings button will become visible. This allows you to adjust the details of each option (see below). Defaults are provided but should be updated to reflect your selected strategy and context."),
                   br(),
-                  p("",tags$b("Vaccination options:")," You may build a vaccination strategy using any number of the following options. Click ", icon('info-circle'), " in the next section for more information on each."),
-                  p("",tags$li("Early childhood booster: recommended dose given between 12 - 23 months old"),""),
-                  p("",tags$li("Child booster: recommended dose given between 4 - 7 years old"),""),
-                  p("",tags$li("Adolescent booster: recommended dose given between 9 - 15 years old"),""),
-                  p("",tags$li("Maternal vaccinaton: dose(s) given to women during antenatal care (ANC) visits"),""),
-                  # p("",tags$li("Mass vaccination: campaign aimed at reaching large groups in the population over a short duration"),""),
+                  p(tags$b("Vaccination options:"), " You may build a vaccination strategy using any number of the following options. Click ", icon('info-circle'), " in the next section for more information on each."),
+                  tags$ul(
+                    tags$li("Early childhood booster: recommended dose given between 12 - 23 months old"),
+                    tags$li("Child booster: recommended dose given between 4 - 7 years old"),
+                    tags$li("Adolescent booster: recommended dose given between 9 - 15 years old"),
+                    tags$li("Maternal vaccinaton: dose(s) given to women during antenatal care (ANC) visits")
+                  ),
                   br(),
-                  p("",tags$b("Vaccination settings:")," You may define the following settings for each vaccination option you include in your strategy. Click ", icon('info-circle'), " in the next section for more information on each."),
-                  p("",tags$li("Target age"),""),
-                  p("",tags$li("Vaccine "),""),
-                  p("",tags$li("Year of introduction"),""),
-                  p("",tags$li("Coverage in year of introduction"),""),
-                  p("",tags$li("Target operational coverage"),""),
-                  p("",tags$li("Years to reach target coverage"),""),
-                  p("",tags$li("Average cost per dose"),""),
-                  p("",tags$li("Proportion paid directly by government"),""),
-                  p("",tags$li("Delivery platform (Health facility or Outreach site)"),""),
+                  p(tags$b("Vaccination settings:"), " You may define the following settings for each vaccination option you include in your strategy. Click ", icon('info-circle'), " in the next section for more information on each."),
+                  tags$ul(
+                    tags$li("Target age"),
+                    tags$li("Vaccine "),
+                    tags$li("Year of introduction"),
+                    tags$li("Coverage in year of introduction"),
+                    tags$li("Target operational coverage"),
+                    tags$li("Years to reach target coverage"),
+                    tags$li("Average cost per dose"),
+                    tags$li("Proportion paid directly by government"),
+                    tags$li("Delivery platform (Health facility or Outreach site)")
+                  ),
                   br(),
-                  p("",tags$b("Save & simulate:")," Once you have completed designing a strategy, name it in the box (bottom right) and click ",tags$b("Run.")," This strategy will be visible in the results section. If you ",tags$b("SAVE CURRENT SESSION")," any time after setting vaccination strategies to simulate, these will be stored as part of your saved session."),
+                  p(tags$b("Save & simulate:"), " Once you have completed designing a strategy, name it in the box (bottom right) and click ", tags$b("Run."), " This strategy will be visible in the results section. If you ", tags$b("SAVE CURRENT SESSION"), " any time after setting vaccination strategies to simulate, these will be stored as part of your saved session."),
                   br()
                 )
               )
