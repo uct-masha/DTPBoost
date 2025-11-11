@@ -58,6 +58,20 @@ span.logo {
   color: #333;
 }
 
+/* Calibrate Model 2.4 tabset */
+
+#validation_results_output {
+  background-color: #FFF !important;
+}
+
+#validation_results_output > li > a {
+  color: #333 !important;
+}
+
+#validation_results_output > li.active {
+  border-bottom: 4px solid #1ab394;
+}
+
 
 /* Epidemiological Output tabset */
 

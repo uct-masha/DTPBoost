@@ -1011,127 +1011,228 @@ body <- dashboardBody(
           ),
           tabPanel("2.2 Explore uncertainty"),
           tabPanel("2.3 Approach to calibration"),
-          tabPanel("2.4 Visualise calibration results")
-          # tabPanel(
-          #   title = "2.2 Calibration",
-          #   value = 2,
-          #   fluidRow(
-          #     column(
-          #       12,
-          #       h3("Instructions"),
-          #       p("The aim of the manual calibration is to adjust the slider values for both pertussis and tetanus until the model output resembles the data. You will need to press the", tags$strong("RUN THE MODEL"), "button after each adjustment of the sliders."),
-          #       p("This manual calibration is a simple form of face validation, which qualitatively assesses if the model is an adequate representation of the data. "),
-          #       p("If you are happy with your calibration, press the",tags$strong("ACCEPT THIS CALIBRATION AND MOVE ON"), "button to move to Step 3: Booster Strategy Design."),
-          #       br()
-          #     )
-          #   ),
-          #   fluidRow(
-          #     column(
-          #       width = 3,
-          #       tags$span(class="hideThis",
-          #                 sliderInput(
-          #                   inputId = "ptrans_D",  # This should be hidden (in www/style.css) since we don't view diphtheria in calibration currently
-          #                   label = "Diphtheria transmission tuning parameter",
-          #                   min = 1,
-          #                   max = 1000,
-          #                   value = 275
-          #                 )
-          #       ),
-          #       sliderInput(
-          #         inputId = "ptrans_T",
-          #         label = "Tetanus transmission tuning parameter",
-          #         min = 1,
-          #         max = 50,
-          #         value = 12, 
-          #         step = 0.1
-          #       ),
-          #       sliderInput(
-          #         inputId = "ptrans_P",
-          #         label = "Pertussis transmission tuning parameter",
-          #         min = 1,
-          #         max = 100,
-          #         value = 25, 
-          #         step = 0.1
-          #       ),
-          #       br(),
-          #       actionButton(
-          #         inputId = "calibrate_manual",
-          #         label = "Run the model",
-          #         width = "100%"
-          #       )
-          #     ),
-          #     column(
-          #       width = 9,
-          #       uiOutput("manual_calibration")
-          #     )
-          #   ),
-          #   br(),
-          #   fluidRow(
-          #     column(
-          #       offset = 8,
-          #       width = 4,
-          #       actionButton(
-          #         inputId = "accept_manual_calibration",
-          #         label = "ACCEPT THIS CALIBRATION AND MOVE ON"
-          #       )
-          #     )
-          #   )
-          # ),
-          # tabPanel(
-          #   title = "2.3  Assessing uncertainty",
-          #   value = 3,
-          #   fluidRow(
-          #     column(
-          #       width = 2,
-          #       offset = 10,
-          #       actionButton("next_uncertainty", "Next", class = "btn-block")
-          #     ),
-          #     column(
-          #       12,
-          #       h3("Instructions"),
-          #       p("As models are simplifications of the real world, it is important to assess the variability of the model predictions in relation to the decision you wish to inform from model evidence. Guidance has been provided below on how to use the DTP Boost tool to test the robustness of model predictions."),
-          #       br(),
-          #       h4("Many sources of uncertainty"),
-          #       p("Uncertainty exists in many forms in modelling including:"),
-          #       tags$ul(
-          #         tags$li("Uncertainty in the model inputs such as the those entered into the sliders and information boxes."),
-          #         tags$li("Uncertainty in the case incidence data that is used to tune the model in the calibration process to create the baseline scenario."),
-          #         tags$li("Uncertainty in the reduction of effectiveness of the vaccine booster strategies due to operational implementation."),
-          #         tags$li("Uncertainty in the estimates of cost and cost effectiveness of the vaccine booster strategies.")
-          #       ),
-          #       br(),
-          #       h4("Using the DTP Boost tool"),
-          #       p("Consider the example of using the DTP Boost tool to determine if the country should introduce a new adolescent booster dose."),
-          #       p("The baseline scenario is important to establish correctly as it sets the foundation against which new strategies are explored and measured."),
-          #       br(),
-          #       p("To develop a robust baseline scenario:"),
-          #       tags$ul(
-          #         tags$li("Vary the input values such as annual vaccine coverage and health system characteristics to see how the baseline changes."),
-          #         tags$li("Place emphasis on varying those input values you are most uncertain about. See how the baseline changes for a range of plausible values.")
-          #       ),
-          #       br(),
-          #       p("The value of the calibration is to position the baseline scenario in line with observed/estimated cases. It is important to choose the dataset for calibration carefully as this dataset should best describe the incidence in the population for both pertussis and tetanus."),
-          #       tags$ul(
-          #         tags$li("Where data does not exist, provide insight by uploading plausible expert-informed pseudo-data using the 'Upload your data' feature. Try to capture different trends and patterns in incidence."),
-          #         tags$li("Fit the model to multiple datasets to define several baselines. You can use the 'Save your session' feature at the top right of the page to save your different baseline scenarios. You can then upload each session separately and test out the intended adolescent booster strategy.")
-          #       ),
-          #       br(),
-          #       p("To develop a robust booster scenario:"),
-          #       tags$ul(
-          #         tags$li("Because there can be a decrease in vaccine impact due to operational challenges during implementation, you should test the booster scenario for a range of coverage values."),
-          #         tags$li("Consider different target age groups if the intended age group may be difficult to reach or characterise."),
-          #         tags$li("As potential implementation and vaccine costs are not always known in advance, run the scenario several times varying the input cost values. Note the impact that changing input costs has on the total cost and cost effectiveness.")
-          #       ),
-          #       br(),
-          #       p("In this manner, assessing the uncertainty will allow you to:"),
-          #       tags$ul(
-          #         tags$li("Gain insight into which health system and cost inputs are most important to estimate correctly. "),
-          #         tags$li("Understand what sources of uncertainty have a large impact on the decision to introduce the new adolescent booster dose. ")
-          #       ),
-          #       br()
-          #     )
-          #   )
-          # )
+           tabPanel(
+            title = "2.4 Visualise validation and calibration results",
+            value = 4,
+            fluidRow(
+              column(
+                width = 12,
+                h3("Visualise Validation and Calibration Results"),
+                p("This page shows an example of calibration results from the model. The example is based on a “Country X\" which has endemic Tetanus and Pertussis cases. The Diphtheria calibration was based on seroprevalence studies as discussed."),
+                br()
+              )
+            ),
+            fluidRow(
+              column(
+                width = 12,
+                # Used tabsetPanel for the disease tabs as requested
+                tabsetPanel(
+                  id = "validation_results_output", # Changed ID to avoid conflict with example
+                  title = NULL,
+                  # Tetanus Tab
+                  tabPanel(
+                    "Tetanus",
+                    fluidRow(
+                      # First Row: Reported cases - Calibration
+                      column(
+                        width = 12,
+                        fluidRow(column(12, tags$br())),
+                        fluidRow(
+                          box(
+                            title = "Tetanus (Reported cases) - Calibration",
+                            width = 6,
+                            plotOutput("tetanus_cases_calib_plot") # Plot placeholder
+                          ),
+                          box(
+                            title = NULL,
+                            width = 6,
+                            p("This is text explaining the tetanus calibration approach and details for incidence",
+                              style="height: 26em") # Text placeholder
+                          )
+                        )
+                      )
+                    ),
+                    br(),
+                    fluidRow(
+                      # Second Row: Reported deaths - Calibration
+                      column(
+                        width = 12,
+                        fluidRow(column(12, tags$br())),
+                        fluidRow(
+                          box(
+                            title = "Tetanus (Reported deaths) - Calibration",
+                            width = 6,
+                            height = '15em',
+                            plotOutput("tetanus_deaths_calib_plot") # Plot placeholder
+                          ),
+                          box(
+                            title = NULL,
+                            width = 6,
+                            p("This is text explaining the tetanus calibration approach and details for incidence",
+                              style="height: 26em")
+                          )
+                        )
+                      )
+                    ),
+                    br(),
+                    fluidRow(
+                      # Third Row: Seroprevalence - Validation
+                      column(
+                        width = 12,
+                        fluidRow(column(12, tags$br())),
+                        fluidRow(
+                          box(
+                            title = "Tetanus (Seroprevalence) - Validation",
+                            width = 6,
+                            height = '26em',
+                            plotOutput("tetanus_sero_val_plot") # Plot placeholder
+                          ),
+                          box(
+                            title = NULL,
+                            width = 6,
+                            p("This is text explaining the validation (or calibration) of immunity profile for tetanus using seroprevalence data",
+                              style="height: 26em")
+                          )
+                        )
+                      )
+                    )
+                  ),
+                  # Pertussis Tab
+                  tabPanel(
+                    "Pertussis",
+                    fluidRow(
+                      # First Row: Reported cases - Calibration
+                      column(
+                        width = 12,
+                        h4("Pertussis (Reported cases) - Calibration"),
+                        fluidRow(
+                          box(
+                            title = NULL,
+                            width = 6,
+                            plotOutput("pertussis_cases_calib_plot") # Plot placeholder
+                          ),
+                          box(
+                            title = NULL,
+                            width = 6,
+                            p("This is text explaining the pertussis calibration approach and details for incidence",
+                              style="height: 26em")
+                          )
+                        )
+                      )
+                    ),
+                    br(),
+                    fluidRow(
+                      # Second Row: Reported deaths - Calibration
+                      column(
+                        width = 12,
+                        h4("Pertussis (Reported deaths) - Calibration"),
+                        fluidRow(
+                          box(
+                            title = NULL,
+                            width = 6,
+                            plotOutput("pertussis_deaths_calib_plot") # Plot placeholder
+                          ),
+                          box(
+                            title = NULL,
+                            width = 6,
+                            p("This is text explaining the pertussis calibration approach and details for incidence",
+                              style="height: 26em")
+                          )
+                        )
+                      )
+                    ),
+                    br(),
+                    fluidRow(
+                      # Third Row: Seroprevalence - Validation
+                      column(
+                        width = 12,
+                        h4("Pertussis (Seroprevalence) - Validation"),
+                        fluidRow(
+                          box(
+                            title = NULL,
+                            width = 6,
+                            plotOutput("pertussis_sero_val_plot") # Plot placeholder
+                          ),
+                          box(
+                            title = NULL,
+                            width = 6,
+                            p("This is text explaining the validation (or calibration) of immunity profile for pertussis using seroprevalence data",
+                              style="height: 26em")
+                          )
+                        )
+                      )
+                    )
+                  ),
+                  # Diphtheria Tab
+                  tabPanel(
+                    "Diphtheria",
+                    fluidRow(
+                      # First Row: Reported cases - Calibration
+                      column(
+                        width = 12,
+                        h4("Diphtheria (Reported cases) - Calibration"),
+                        fluidRow(
+                          box(
+                            title = NULL,
+                            width = 6,
+                            plotOutput("diphtheria_cases_calib_plot") # Plot placeholder
+                          ),
+                          box(
+                            title = NULL,
+                            width = 6,
+                            p("This is text explaining the diphtheria calibration approach and details for incidence",
+                              style="height: 26em")
+                          )
+                        )
+                      )
+                    ),
+                    br(),
+                    fluidRow(
+                      # Second Row: Reported deaths - Calibration
+                      column(
+                        width = 12,
+                        h4("Diphtheria (Reported deaths) - Calibration"),
+                        fluidRow(
+                          box(
+                            title = NULL,
+                            width = 6,
+                            plotOutput("diphtheria_deaths_calib_plot") # Plot placeholder
+                          ),
+                          box(
+                            title = NULL,
+                            width = 6,
+                            p("This is text explaining the diphtheria calibration approach and details for incidence",
+                              style="height: 26em")
+                          )
+                        )
+                      )
+                    ),
+                    br(),
+                    fluidRow(
+                      # Third Row: Seroprevalence - Validation
+                      column(
+                        width = 12,
+                        h4("Diphtheria (Seroprevalence) - Validation"),
+                        fluidRow(
+                          box(
+                            title = NULL,
+                            width = 6,
+                            plotOutput("diphtheria_sero_val_plot") # Plot placeholder
+                          ),
+                          box(
+                            title = NULL,
+                            width = 6,
+                            p("This is text explaining the validation (or calibration) of immunity profile for diphtheria using seroprevalence data",
+                              style="height: 26em")
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
         )
       )
     ),
