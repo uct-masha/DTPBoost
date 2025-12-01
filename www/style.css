@@ -58,6 +58,20 @@ span.logo {
   color: #333;
 }
 
+/* Explore data and uncertainty 2.1 tabset */
+
+#explore_data {
+  background-color: #FFF !important;
+}
+
+#explore_data > li > a {
+  color: #333 !important;
+}
+
+#explore_data > li.active {
+  border-bottom: 4px solid #1ab394;
+}
+
 /* Calibrate Model 2.4 tabset */
 
 #validation_results_output {
@@ -581,4 +595,14 @@ img {
 #next_cvs, #next_hs, #next_costs, #next_dbs, #next_uncertainty {
   color: #ffffff;
   background-color: #237D80;
+}
+
+/* note to highlight some text */
+.note {
+    background: #e3f2fd;
+    padding: 16px;
+    margin: 24px 0;
+    border-left: 3px solid #3498db;
+    font-size: 14px;
+    color: #4a4a4a;
 }

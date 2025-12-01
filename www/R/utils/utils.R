@@ -432,3 +432,26 @@ coverage_plot <- function(xx, yy, y_start, y_end, startyear) {
     scale_y_continuous(limits=c(0, 1), labels=scales::label_percent(accuracy = 1)) +
     theme_minimal()
 }
+
+# function to create box rows
+step_2_4_boxrow <- function(title, inputId, description){
+  fluidRow(
+          column(
+            width = 12,
+            fluidRow(column(12, tags$br())),
+            fluidRow(
+              box(
+                title = title,
+                width = 6,
+                plotOutput(inputId) # Plot placeholder
+              ),
+              box(
+                title = NULL,
+                width = 6,
+                p(description,
+                  style="height: 26em") # Text placeholder
+              )
+            )
+          )
+        )
+}
