@@ -10,6 +10,7 @@ options(datatable.quiet = TRUE) # Hush data.table loads
 options(future.globals.onReference = "warn") # Warn on global references not copied
 options(future.rng.onMisuse = "ignore") # Suppress warning about parallel random numbers
 source(here::here("www/R/packages.R"))
+source(here::here("www/R/mod_explore_data.R")) # Step 2.1 Explore Data - module for each box (disease&metric tile)
 source(here::here("models/R/scripts/utils.R"))  # logging
 LOG <- makeLogger(default_level = LEVEL$TRACE)
 
@@ -650,7 +651,7 @@ body <- dashboardBody(
                          fluidRow(
                            column(12, "Use the options below to select how likely it is that if cases are present, a mild/severe case will be treated."),
                            column(4,"Diphtheria",
-                                  sliderInput(post='%', inputId="p_mt_D", label="Probability of a mild case being treated (outpatient)", min=0, max=100, value=40),
+                                  sliderInput(post='%', inputId="p_mt_D", label="Probability of a mild case being treated (outpatient)", min=0, max=100, value=40)
                            ),
                            column(4,"Pertussis",
                                   sliderInput(post='%', inputId="p_mt_P", label="Probability of a mild case being treated (outpatient)", min=0, max=100, value=30)),
@@ -889,173 +890,10 @@ body <- dashboardBody(
           id = "calibration_tab",
           width = 12, 
           title = NULL,
-          ### Model Calibration ----
-          # tabPanel(
-          #   title = "2.1 Explore data",
-          #   value = 1,
-          #   fluidRow(
-          #     column(
-          #       width = 12,
-          #       h3("Instructions"),
-          #       p("Please use the options below to select the incidence dataset to be used for model fitting. Model fitting is conducted to validate that the transmission model produces estimates that are similar to observed data. A fitted model adds validity to predictions of the impact of vaccination. The reporting rate specified in the Health System section will be used to correct for under-reporting of diagnosed cases."),
-          #       p("Two data options are available: 1) WHO observed incidence data and 2) Global Burden of Disease incidence estimates. ", actionButton("calData", label = "", icon = icon("info-circle"), class = "btn-info"), " If you prefer to upload your own incidence data, you may do so in the ‘Upload your data’ box below. "),
-          #       p("Given that unpredictable external drivers often seed diphtheria outbreaks, calibration is applied to pertussis and tetanus only. It is important to interrogate the datasets to determine if data are valid given local experience" ,tags$i("for both pertussis and tetanus"), "to fit the model. ")
-          #     )
-          #   ),
-            
-          #   br(),
-          #   fluidRow(
-          #     box(
-          #       title = strong("Choose a dataset for calibration"),
-          #       p("Use the buttons to select a dataset for calibration that best fits your country's profile."),
-          #       width = 12,
-          #       fluidRow(
-          #         column(
-          #           offset = 0,
-          #           width = 3,
-          #           radioButtons(
-          #             inputId = "data_source_calibration",
-          #             #label = "Select your data for calibration",
-          #             label = NULL,
-          #             choices = c("WHO", "GBD", "OWN DATA"),
-          #             selected = "GBD"
-          #             #        status = "calibration_btns"
-          #           )
-          #         ),
-          #         column(
-          #           offset = 0,
-          #           width = 3,
-          #           actionButton(
-          #             inputId = "go_to_calibration",
-          #             label = "Go to calibration"
-          #           )
-          #         )
-          #       ),
-          #       fluidRow(
-          #         column(
-          #           width = 12,
-          #           p("The plots below display the ",
-          #              strong("WHO data"), "and", strong('GBD estimates'), " to help you select the best approach. The option to upload your own data is shown under the heading", strong('Upload your data.'))
-          #         )
-          #       )
-          #     )
-          #   ),
-          #   br(),
-          #   fluidRow(
-          #     column(
-          #       width = 12,
-          #       fluidRow(
-          #         box(
-          #           title = "WHO data: Global Health Observatory annual reported incidence ",
-          #           width = 12,
-          #           #column(12, reactableOutput("clinical_burden_table"))
-          #           plotlyOutput("who_clinical_burden_plot")
-          #         )
-          #       )
-          #     ),
-          #     column(
-          #       width = 12,
-          #       fluidRow(
-          #         box(
-          #           title = "GBD estimates: Global Burden of Disease estimates of annual clinical incidence",
-          #           width = 12,
-          #           plotlyOutput("gbd_clinical_burden_plot")
-          #         )
-          #       )
-          #     ),
-          #     uiOutput("custom_data_upload"),
-          #     column(
-          #       width = 12,
-          #       fluidRow(
-          #         box(
-          #           title = "Upload your data",
-          #           width = 12,
-          #           fluidRow(
-          #             column(
-          #               width = 8,
-          #               #h4("Upload own data"),
-          #               p(""),
-          #               p("To replace the default data, please download the template by clicking the",tags$b("DOWNLOAD TEMPLATE"), "button on the right,
-          #                 make your changes on the downloaded template, and upload this file using the", tags$b("BROWSE"), "option.
-          #                 Add notes on the source of your data or any other relevant details. "),
-          #               p("Once you have uploaded your own data, return to the top, make sure ", tags$b("OWN DATA"), "is selected and click ",tags$b("GO TO CALIBRATION"), "to continue."),
-          #               br(),
-          #               h5("Add notes"),
-          #               textAreaInput(
-          #                 inputId = 'notes_calibration',
-          #                 label = NULL,
-          #                 width = "100%"
-          #               )
-          #             ),
-          #             column(
-          #               width = 4,
-          #               h5("1. Download template"),
-          #               shiny::downloadButton(
-          #                 outputId = "template_burden",
-          #                 label = 'Download'
-          #               ),
-          #               br(),
-          #               br(),
-          #               h5("2. Upload changes"),
-          #               shiny::fileInput(
-          #                 inputId = "burden_input",
-          #                 label = NULL,
-          #                 buttonLabel = list(icon("fas fa-upload"),"Browse"),
-          #                 accept='.xlsx'
-          #               )
-          #             )
-          #           )
-          #         )
-          #       )
-          #     )
-          #   )
-          # ),
           tabPanel(
             title = "2.1 Explore data",
             value = 1,
-            fluidRow(
-              column(
-                width = 12,
-                h3("Visualise validation and calibration results"),
-                p("This page shows an example of calibration results from the model. The example is based on a 'Country X' which has endemic Tetanus and Pertussis cases. The Diphtheria calibration was based on seroprevalence studies as discussed."),
-                tabsetPanel(
-                  id = "explore_data",
-                  tabPanel(
-                    "Diphtheria",
-                    br(),
-                    box(
-                      width = 12,
-                      title = "Reported Cases",
-                      fluidRow(
-                        column(
-                          width = 8,
-                          plotlyOutput("who_clinical_burden_plot")
-                        ),
-                        column(
-                          width = 4,
-                          div(
-                            class = "note",
-                            "This is text explaining the tetanus calibration approach and details for incidence using WHO data…"
-                          )
-                        )
-                      )
-                    )
-                  ),
-                  tabPanel(
-                    title = "Tetanus",
-                    br(),
-                    "Plots"
-                  ),
-                  tabPanel(
-                    title = "Pertussis",
-                    br(),
-                    "Plots"
-                  )
-                )
-              )
-            ),
-            br(),
-          ),
+            exploreDataUI("explore_data")),
           tabPanel("2.2 Explore uncertainty"),
           tabPanel("2.3 Approach to calibration"),
           tabPanel(
@@ -3764,6 +3602,10 @@ server <- function(input, output, session) {
   )
   
   # Step 2. Calibrate Model ----
+  # 2.1 Explore Data
+  exploreDataServer(
+    id = "explore_data"
+  )
   
   # 2.3 Assessing uncertainty
   observeEvent(input$next_uncertainty,{
